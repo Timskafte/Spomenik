@@ -13,6 +13,7 @@ public class EnemyHealthManager : MonoBehaviour {
     private Text monsterName;
 
     public string[] nameforMonsters = { "bob", "ray", "T-Chains" };
+    public GameObject CBTprefab;
 
 
     void Start () {
@@ -34,10 +35,23 @@ public class EnemyHealthManager : MonoBehaviour {
         }
 	}
 
-    public void HurtEnemy(float damage, float threat, string playerOrigin)
+    public void HurtEnemy(float damage, float threat, string playerOrigin, bool isCrit)
     {
+        if (health < damage)
+        {
+            damage = health;
+        }
         currentHealth -= damage;
         healthBar.fillAmount = currentHealth / health;
+
+        if (!isCrit)
+        {
+            InitCBT(damage.ToString()).GetComponent<Animator>().SetTrigger("Hit");
+        }
+        else
+        {
+            InitCBT(damage.ToString()).GetComponent<Animator>().SetTrigger("Crit");
+        }
 
 
         if (playerOrigin == "_P1")
@@ -58,5 +72,20 @@ public class EnemyHealthManager : MonoBehaviour {
         }
 
         enemyController.updateTarget();
+    }
+
+    GameObject InitCBT(string text)
+    {
+        GameObject temp = Instantiate(CBTprefab) as GameObject;
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(transform.FindChild("EnemyCanvas"));
+        tempRect.transform.localPosition = CBTprefab.transform.localPosition;
+        tempRect.transform.localScale = CBTprefab.transform.localScale;
+        tempRect.transform.localRotation = CBTprefab.transform.localRotation;
+
+        temp.GetComponent<Text>().text = text;
+        Destroy(temp.gameObject, 2);
+
+        return temp;
     }
 }

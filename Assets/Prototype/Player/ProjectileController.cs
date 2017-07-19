@@ -11,6 +11,7 @@ public class ProjectileController : MonoBehaviour {
 
     public int damageToGive;
     public int threatToGive;
+    public int CritChance = 50;
 
     void Update()
     {
@@ -30,11 +31,21 @@ public class ProjectileController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive, threatToGive, playerOwnership);
+            other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive, threatToGive, playerOwnership, CritCalculation());
             Destroy(gameObject);
         } else if (other.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }
+    }
+
+    bool CritCalculation()
+    {
+        int rand = Random.Range(0, 100);
+        if (rand < CritChance)
+        {
+            return false;
+        }
+        return true;
     }
 }
