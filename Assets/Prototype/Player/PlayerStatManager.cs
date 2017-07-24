@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthManager : MonoBehaviour {
+public class PlayerStatManager : MonoBehaviour {
 
     public int health;
     public int currentHealth;

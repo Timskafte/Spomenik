@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InterfaceHealthBar : MonoBehaviour {
 
-    public PlayerHealthManager playerHealthManager;
+    public PlayerStatManager playerStatManager;
     private float max;
     private float current;
 
@@ -16,8 +16,8 @@ public class InterfaceHealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        max = playerHealthManager.health;
-        current = playerHealthManager.currentHealth;
+        max = playerStatManager.health;
+        current = playerStatManager.currentHealth;
 
         float percentage = current / max;
         transform.localScale = new Vector3(percentage, 1f, 1f);

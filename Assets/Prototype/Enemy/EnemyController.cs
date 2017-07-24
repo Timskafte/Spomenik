@@ -10,7 +10,6 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed;
 
     public PlayerController target;
-
     public PlayerController[] players;
 
     public PlayerController player1;
@@ -30,11 +29,31 @@ public class EnemyController : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
 
         players = FindObjectsOfType(typeof(PlayerController)) as PlayerController[];
-        
-        player1 = players[0];
-        player2 = players[1];
-        player3 = players[2];
-        player4 = players[3];
+
+        foreach (PlayerController player in players)
+        {
+            
+            if (player.playerNumber == PlayerController.PlayerNumber._P1)
+            {
+                player1 = player;
+            }
+
+            if (player.playerNumber == PlayerController.PlayerNumber._P2)
+            {
+                player2 = player;
+            }
+
+            if (player.playerNumber == PlayerController.PlayerNumber._P3)
+            {
+                player3 = player;
+            }
+
+            if (player.playerNumber == PlayerController.PlayerNumber._P4)
+            {
+                player4 = player;
+            }
+            
+        }
 
     }
 
