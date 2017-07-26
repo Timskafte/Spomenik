@@ -35,6 +35,7 @@ public class PlayerStatManager : MonoBehaviour {
         public int manaPool = 100;
         public float cooldownReduction = 1f;
         public float healingBonus = 1f;
+        public int statPoints = 5;
     }
 
     public statBlock stats;

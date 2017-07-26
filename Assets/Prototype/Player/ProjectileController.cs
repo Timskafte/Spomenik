@@ -9,9 +9,9 @@ public class ProjectileController : MonoBehaviour {
     
     public float lifeTime = 1f;
 
-    public int damageToGive;
-    public int threatToGive;
-    public int CritChance = 50;
+    public float damageToGive;
+    public float threatToGive;
+    public bool crit;
 
     void Update()
     {
@@ -31,7 +31,7 @@ public class ProjectileController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive, threatToGive, playerOwnership, CritCalculation());
+            other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive, damageToGive, playerOwnership, crit);
             Destroy(gameObject);
         } else if (other.gameObject.tag == "Player")
         {
@@ -39,13 +39,4 @@ public class ProjectileController : MonoBehaviour {
         }
     }
 
-    bool CritCalculation()
-    {
-        int rand = Random.Range(0, 100);
-        if (rand < CritChance)
-        {
-            return false;
-        }
-        return true;
-    }
 }

@@ -12,13 +12,17 @@ public class WeaponController : MonoBehaviour {
     public float timeBetweenProjectiles;
     public float shotCounter;
 
-    public Transform projectileSpawnPoint;
+    public float abilityDamage = 2;
+
+    private Transform projectileSpawnPoint;
     private PlayerController playerController;
+    private PlayerStatManager playerStatsManager;
 
 	void Start () {
         playerController = gameObject.GetComponentInParent<PlayerController>();
-		
-	}
+        playerStatsManager = gameObject.GetComponentInParent<PlayerStatManager>();
+        projectileSpawnPoint = gameObject.transform.FindChild("ProjectileSpawner");
+    }
 	
 	void Update () {
 
@@ -31,6 +35,15 @@ public class WeaponController : MonoBehaviour {
                 ProjectileController newProjectile = Instantiate(projectile, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
                 newProjectile.speed = projectileSpeed;
                 newProjectile.playerOwnership = playerController.playerNumber.ToString();
+                newProjectile.crit = CritCalculation(playerStatsManager.stats.critChance);
+
+                if (newProjectile.crit == true)
+                {
+                    newProjectile.damageToGive = abilityDamage * playerStatsManager.stats.critDamage;
+                } else
+                {
+                    newProjectile.damageToGive = abilityDamage;
+                }
             }
         } else
         {
@@ -38,4 +51,16 @@ public class WeaponController : MonoBehaviour {
         }
 		
 	}
+
+    bool CritCalculation(float chanceForCrit)
+    {
+        float rand = Random.Range(0f, 1f);
+        //Debug.Log("crit roll is: ..." + rand + " ... with chance at: ..." + chanceForCrit);
+        if (rand > chanceForCrit)
+        {
+            return false;
+        }
+        Debug.Log("crit rolled succesfully");
+        return true;
+    }
 }

@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (Input.GetButtonDown(start))
         {
-            Debug.Log("Start pressed by " + playerNumber + " ... " + menuInputMode);
+            //Debug.Log("Start pressed by " + playerNumber + " ... " + menuInputMode);
             menuInputMode = !menuInputMode;
             menuCurrent = 1;
             updateMenuType();
