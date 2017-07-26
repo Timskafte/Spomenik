@@ -19,8 +19,8 @@ public class EnemyHealthManager : MonoBehaviour {
     void Start () {
         currentHealth = health;
         enemyController = gameObject.GetComponent<EnemyController>();
-        healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
-        monsterName = transform.FindChild("EnemyCanvas").FindChild("MonsterName").GetComponent<Text>();
+        healthBar = transform.Find("EnemyCanvas").Find("HealthBG").Find("Health").GetComponent<Image>();
+        monsterName = transform.Find("EnemyCanvas").Find("MonsterName").GetComponent<Text>();
 
         int nameIndex = Random.Range(0, (nameforMonsters.Length - 1));
         monsterName.text = nameforMonsters[nameIndex];
@@ -78,7 +78,7 @@ public class EnemyHealthManager : MonoBehaviour {
     {
         GameObject temp = Instantiate(CBTprefab) as GameObject;
         RectTransform tempRect = temp.GetComponent<RectTransform>();
-        temp.transform.SetParent(transform.FindChild("EnemyCanvas"));
+        temp.transform.SetParent(transform.Find("EnemyCanvas"));
         tempRect.transform.localPosition = CBTprefab.transform.localPosition;
         tempRect.transform.localScale = CBTprefab.transform.localScale;
         tempRect.transform.localRotation = CBTprefab.transform.localRotation;

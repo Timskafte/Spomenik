@@ -148,20 +148,20 @@ public class PlayerController : MonoBehaviour {
             if (menuCurrent == 1)
             {
                 //menu.SetActive(true);
-                menu.transform.FindChild("SpellMenu").gameObject.SetActive(true);
-                menu.transform.FindChild("StatMenu").gameObject.SetActive(false);
+                menu.transform.Find("SpellMenu").gameObject.SetActive(true);
+                menu.transform.Find("StatMenu").gameObject.SetActive(false);
             }
             if (menuCurrent == 2)
             {
                 //menu.SetActive(true);
-                menu.transform.FindChild("StatMenu").gameObject.SetActive(true);
-                menu.transform.FindChild("SpellMenu").gameObject.SetActive(false);
+                menu.transform.Find("StatMenu").gameObject.SetActive(true);
+                menu.transform.Find("SpellMenu").gameObject.SetActive(false);
                 menu.GetComponent<MenuController>().updateMenuStats();
             }
         } else
         {
-            menu.transform.FindChild("StatMenu").gameObject.SetActive(false);
-            menu.transform.FindChild("SpellMenu").gameObject.SetActive(false);
+            menu.transform.Find("StatMenu").gameObject.SetActive(false);
+            menu.transform.Find("SpellMenu").gameObject.SetActive(false);
         }
     }
 }

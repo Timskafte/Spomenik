@@ -21,7 +21,7 @@ public class WeaponController : MonoBehaviour {
 	void Start () {
         playerController = gameObject.GetComponentInParent<PlayerController>();
         playerStatsManager = gameObject.GetComponentInParent<PlayerStatManager>();
-        projectileSpawnPoint = gameObject.transform.FindChild("ProjectileSpawner");
+        projectileSpawnPoint = gameObject.transform.Find("ProjectileSpawner");
     }
 	
 	void Update () {
